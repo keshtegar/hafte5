@@ -1,79 +1,61 @@
 class Time:
-    def __init__(self, h, m, s):
-        self.h = h
-        self.m = m
-        self.s = s
-
+    def __init__(self,h,m,s):
+       self.h=h
+       self.m=m
+       self.s=s
 
     def show(self):
-        print(self.h, ":", self.m, ":", self.s)
+        print(self.h,":",self.m,":",self.s)
 
-
-    def sum(self, t2):
-        result = Time(None, None, None)
-        result.h = self.h + t2.h
-        result.m = self.m + t2.m
-        result.s = self.s + t2.s
-
-        if result.s >= 60:
-            result.s -= 60
-            result.m += 1
-
-        if result.m >= 60:
-            result.m -= 60
-            result.h += 1
-
+    def sum(self,t2):
+        result=Time(None,None,None)
+        result.h=self.h+t2.h
+        result.m=self.m+t2.m
+        result.s=self.s+t2.s
+        if result.m>=60:
+            result.m-=60
+            result.m+=1
+        if result.s>=60:
+            result.s-=60
+            result.s+=1
         return result
-
-
-    def minus(self, t2):
-        result = Time(None, None, None)
-        result.h = self.h - t2.h
-        result.m = self.m - t2.m
-        result.s = self.s - t2.s
-        
-        if result.s < 0:
-            result.s += 60
-            result.m -= 1
-
-        if result.m < 60:
-            result.m += 60
-            result.h -= 1
-
+    def sub(self,t2):
+        result=Time(None,None,None)
+        result.h=self.h-t2.h
+        result.m=self.m-t2.m
+        result.s=self.s-t2.s
+        if result.m<0:
+            result.m+=60
+            result.h-=1
+        if result.s<0:
+            result.s+=60
+            result.m-=1
         return result
+    def convert_time_to_srcond(self):
+        convert=self.h*3600+self.m*60+self.s
+        return convert
+    def convert_second_to_time(self):     
+        h=int(self/3600)  
+        m=int((self-h*3600)/60)
+        second=int((self-h*3600-m*60))
+        return [h,m,s] 
 
 
-    def TtoS(self):
-        convert1 = 3600 * self.h + 60 * self.m + self.s
-        return convert1
+time_1={"h":10,"m":20,"s":25}
+print("Time_1 : " , time_1 ) 
+time_1=Time(10,20,25)
+
+time_2={"h":8,"m":30,"s":5}
+print("Time_2 : ", time_2 ) 
+time_2=Time(8,30,5)
 
 
-def StoT(self):
-    hour = int(self/3600)
-    minute = int((self-hour*3600)/60)
-    second1 = int(self - hour*3600 - minute*60)
-    return [hour, minute, second1]
 
-time1 = Time(10, 20, 25)
-time2 = Time(8, 30, 40)
-sanie = 7393
 
-print("time1 is: ")
-time1.show()
-
-print("time2 is: ")
-time2.show()
-
-s = time1.sum(time2)
-print("time1 + time2 is equal to: ")
+s=time_1.sum(time_2)
+sub=time_1.sub(time_2)
+conv_timetos=time_1.convert_time_to_srcond()
+conv_stotime=time_1.convert_second_to_time()
 s.show()
-
-m = time1.minus(time2)
-print("time1 - time2 is equal to: ")
-m.show()
-
-second = time1.TtoS()
-print("time1 convert to second:\n" ,second)
-
-time = StoT(sanie)
-print ("second convert to Time:\n", time[0], ":", time[1], ":", time[2])
+sub.show()
+print("Time Convert to Seconds:  \n" "Time Equal To= " , conv_timetos ,"Seconds" )
